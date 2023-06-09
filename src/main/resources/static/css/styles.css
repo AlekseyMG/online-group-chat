@@ -1,5 +1,5 @@
 .messages-and-users {
-    display: flex;
+    display: none;
     margin-bottom: 10px;
 }
 
@@ -10,6 +10,7 @@
     border-radius: 5px;
     margin-right: 20px;
     background-color: #e2faff;
+    overflow-y: scroll;
 }
 
 .users-list {
@@ -21,11 +22,16 @@
 }
 
 .controls {
-    display: flex;
+    display: none;
 }
 
 .new-message {
     width: 797px;
+    wrap: soft;
+    resize: none;
+    textarea:focus;
+    input: focus;
+    outline: none;
     border: 1px solid gray;
     border-radius: 5px;
     margin-right: 20px;
@@ -35,4 +41,24 @@
     width: 200px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+.message-item {
+    margin: 20px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.datetime {
+    color: blue;
+}
+
+.username {
+    font-weight: bold;
+    color: red;
+    margin-right: 10px
 }
