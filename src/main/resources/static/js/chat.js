@@ -11,7 +11,6 @@ $(function(){
     };
 
     let updateMessages = function(){
-        //$('.messages-list').html('<i>Сообщений нет</i>');
         $.get('/message', {}, function(response){
             if(response.length == 0) {
                 return;
@@ -22,6 +21,7 @@ $(function(){
                 $('.messages-list').append(element);
             }
         });
+        $('.messages-list').scrollTop($('.messages-list').height());
     };
 
     let initApplication = function(){
