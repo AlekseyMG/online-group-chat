@@ -1,20 +1,17 @@
 package main.controller;
 
-import jakarta.validation.Valid;
 import main.dto.DtoMessage;
 import main.dto.MessageMapper;
 import main.model.Message;
 import main.model.User;
 import main.repository.MessageRepository;
 import main.repository.UserRepository;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,7 +57,6 @@ public class ChatController {
         String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
         User user = userRepository.findBySessionId(sessionId).get();
         Message userMessage = new Message();
-        //userMessage.setId(user.getId());
         userMessage.setMessage(message);
         userMessage.setUser(user);
         userMessage.setDateTime(LocalDateTime.now());
@@ -75,10 +71,12 @@ public class ChatController {
                 .stream()
                 .map(message -> MessageMapper.map(message))
                 .collect(Collectors.toList());
-        //return new ArrayList<>();
     }
+
     @GetMapping("/user")
-    public ConcurrentHashMap<Integer, String> getUsersList() {
-        return null;
+    public List<String> getUserList() {
+        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "name"))
+                .stream().map(User::getName)
+                .toList();
     }
 }

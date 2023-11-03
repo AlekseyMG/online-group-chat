@@ -10,6 +10,12 @@ $(function(){
         return item;
     };
 
+    let getUserElement = function(user){
+            let item = $('<div class="user-name"></div>');
+            item.append(user);
+            return item;
+        };
+
     let updateMessages = function(){
         $.get('/message', {}, function(response){
             if(response.length == 0) {
@@ -23,6 +29,19 @@ $(function(){
         });
         $('.messages-list').scrollTop($('.messages-list').height());
     };
+
+    let updateUsers = function(){
+            $.get('/user', {}, function(response){
+                if(response.length == 0) {
+                    return;
+                }
+                $('.users-list').html('');
+                for(i in response) {
+                    let element = getUserElement(response[i]);
+                    $('.users-list').append(element);
+                }
+            });
+        };
 
     let initApplication = function(){
         $('.messages-and-users').css({display: 'flex'});
@@ -38,6 +57,7 @@ $(function(){
             });
         });
         setInterval(updateMessages, 1000);
+        setInterval(updateUsers, 1000);
     };
 
     let registerUser = function(name){

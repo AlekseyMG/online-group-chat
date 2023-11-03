@@ -2,10 +2,8 @@ package main.dto;
 
 import main.model.Message;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.logging.SimpleFormatter;
 
 public class MessageMapper {
     public static DtoMessage map(Message message) {
